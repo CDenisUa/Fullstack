@@ -10,4 +10,5 @@ mongoose.connect(process.env.MONGODB_URI)
     })
     .catch((err) => {
         console.error('MongoDB connection error:', err);
+        process.exit(1); // 1 code means exit with failure, 0 means success
     });
