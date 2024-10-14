@@ -8,10 +8,10 @@ import Product from "./models/product.model.js";
 const app = express();
 
 app.use(express.json());
-app.post('api/products', async (req, res) => {
+app.post('/api/products', async (req, res) => {
     const product = req.body;
 
-    if (!product.name || !product.price || !product.images) {
+    if (!product.name || !product.price || !product.image) {
         return res.status(400).send({
             success: false,
             message: 'Please provide all fields.'
