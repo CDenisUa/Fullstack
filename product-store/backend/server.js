@@ -8,6 +8,7 @@ import Product from "./models/product.model.js";
 const app = express();
 
 app.use(express.json());
+
 app.post('/api/products', async (req, res) => {
     const product = req.body;
 
@@ -27,11 +28,39 @@ app.post('/api/products', async (req, res) => {
             data: newProduct
         })
     } catch (error) {
-        console.error('Error creating product', error.message);
         return res.status(500).json({
             success: false,
-            message: 'Something went wrong'
+            message: 'Something went wrong',
+            error: error.message
         })
+    }
+});
+
+app.delete('/api/products/:id', async (req, res) => {
+    const id = req.params.id;
+
+    try {
+        const product = await Product.findById(id);
+        if (!product) {
+            return res.status(404).json({
+                success: false,
+                message: 'Product not found'
+            });
+        }
+
+        await Product.findByIdAndDelete(id);
+
+        res.status(200).json({
+            success: true,
+            message: 'Product deleted successfully.'
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'An error occurred while deleting the product',
+            error: error.message
+        });
     }
 });
 
