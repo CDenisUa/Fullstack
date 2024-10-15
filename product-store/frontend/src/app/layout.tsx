@@ -8,6 +8,7 @@ import {
     geistSans,
     geistMono,
 } from '@/helpers/fonts';
+import {Providers} from "@/app/providers";
 
 export const metadata: Metadata = {
     title: "Create Next App",
@@ -15,12 +16,14 @@ export const metadata: Metadata = {
 };
 
 const RootLayout: NextPage<Readonly<PropsWithChildren>> = ({children}) =>
-    <html lang="en">
+    <html
+        lang="en"
+        suppressHydrationWarning={true}
+    >
         <body
-            suppressHydrationWarning
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-        {children}
+            <Providers>{children}</Providers>
         </body>
     </html>
 

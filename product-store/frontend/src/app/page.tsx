@@ -1,7 +1,10 @@
 // Core
+import {Button} from "@chakra-ui/react";
 
 export default function Home() {
   return (
-    <div>Next app</div>
+    <div>
+      <Button>Next app</Button>
+    </div>
   );
 }
