@@ -9,6 +9,22 @@ const app = express();
 
 app.use(express.json());
 
+app.get('/api/products', async (req, res) => {
+    try {
+        const products = await Product.find({});
+        res.status(200).json({
+            success: true,
+            data: products
+        });
+    } catch (error) {
+        res.status(404).send({
+            success: false,
+            message: 'Something went wrong',
+            error: error.message
+        })
+    }
+})
+
 app.post('/api/products', async (req, res) => {
     const product = req.body;
 
