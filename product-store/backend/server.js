@@ -7,11 +7,12 @@ import productRoutes from './routes/product.routes.js';
 
 const app = express();
 
+// Middlewares
 app.use(express.json());
-app.use('/api', productRoutes);
 
+// Routes
+app.use('/api/products', productRoutes);
 
-
-app.listen(4200, () => {
-    console.log('Server started at http://localhost:4200');
+app.listen(process.env.PORT, () => {
+    console.log(`Server started at http://localhost:${process.env.PORT}`);
 });

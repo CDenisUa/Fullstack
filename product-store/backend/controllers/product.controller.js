@@ -1,6 +1,7 @@
+// Core
+import mongoose from "mongoose";
 // Models
 import Product from '../models/product.model.js';
-import mongoose from "mongoose";
 
 export const getProducts = async (req, res) => {
     try {
@@ -12,7 +13,7 @@ export const getProducts = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: 'Something went wrong',
+            message: "Something went wrong",
             error: error.message
         });
     }
@@ -39,7 +40,7 @@ export const createProduct = async (req, res) => {
     } catch (error) {
         return res.status(500).json({
             success: false,
-            message: 'Something went wrong',
+            message: "Something went wrong",
             error: error.message
         });
     }
@@ -67,7 +68,7 @@ export const deleteProduct = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: 'An error occurred while deleting the product',
+            message: "Something went wrong",
             error: error.message
         });
     }
@@ -91,9 +92,9 @@ export const updateProduct = async (req, res) => {
             data: updatedProduct
         })
     } catch (error) {
-        res.status(404).json({
+        res.status(500).json({
             success: false,
-            message: "Product not found",
+            message: "Something went wrong",
             error: error.message
         })
     }
