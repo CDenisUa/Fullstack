@@ -4,7 +4,7 @@ import {Button} from "@chakra-ui/react";
 export default function Home() {
   return (
     <div>
-      <Button>Next app</Button>
+      Home page
     </div>
   );
 }
