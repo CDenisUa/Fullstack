@@ -8,7 +8,10 @@ import {Box} from "@chakra-ui/react";
 
 const AppContainer: FC<PropsWithChildren> = ({children}) => {
     return (
-        <Box bg={useColorModeValue('gray.100', 'gray.900')}>
+        <Box
+            h='100vh'
+            bg={useColorModeValue('gray.100', 'gray.900')}
+        >
             {children}
         </Box>
     );
