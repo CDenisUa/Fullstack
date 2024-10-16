@@ -2,18 +2,25 @@
 
 // Core
 import {FC, useState, ChangeEvent} from 'react';
+// Store
+import {
+    useProductStore,
+} from '@/store';
 // Components
 import {
     Box,
     Button,
     Container,
     Heading,
-    Input,
+    Input, useToast,
     VStack
 } from "@chakra-ui/react";
 import {useColorModeValue} from "@chakra-ui/icons";
 
 const CreatePage: FC = () => {
+    const { createProduct } = useProductStore();
+    const toast = useToast();
+
     const [newProduct, setNewProduct] = useState({
         name: '',
         price: '',
@@ -28,8 +35,24 @@ const CreatePage: FC = () => {
         });
     }
 
-    const addProductHandle = () => {
-        console.log(newProduct);
+    const addProductHandle = async () => {
+        const { success, message } = await createProduct(newProduct);
+
+        if(!success) {
+            toast({
+                title: "Error",
+                description: message,
+                status: 'error',
+                isClosable: true,
+            });
+        } else {
+            toast({
+                title: "Success",
+                description: message,
+                status: 'success',
+                isClosable: true,
+            });
+        }
     }
 
     return (

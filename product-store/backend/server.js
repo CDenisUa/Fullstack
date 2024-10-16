@@ -1,5 +1,6 @@
 // Core
 import express from 'express';
+import cors from 'cors';
 // DB
 import './db.js';
 // Routes
@@ -9,6 +10,9 @@ const app = express();
 
 // Middlewares
 app.use(express.json());
+app.use(cors({
+    origin: true,
+}))
 
 // Routes
 app.use('/api/products', productRoutes);
