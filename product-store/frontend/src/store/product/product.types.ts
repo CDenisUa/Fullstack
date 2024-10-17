@@ -1,4 +1,7 @@
 export interface Product {
+    _id?: string;
+    updatedAt?: string;
+    createdAt?: string;
     name: string;
     price: string;
     image: string;

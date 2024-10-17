@@ -11,6 +11,7 @@ import {
     VStack,
     Text, SimpleGrid
 } from "@chakra-ui/react";
+import ProductCard from "@/components/product-card/ProductCard";
 
 const Home: FC = () => {
     const {fetchProducts, products} = useProductStore();
@@ -19,7 +20,8 @@ const Home: FC = () => {
         fetchProducts();
     },[fetchProducts])
 
-    console.log('products', products)
+    console.log(products)
+
     return (
         <Container
             maxW='container.xl'
@@ -44,7 +46,14 @@ const Home: FC = () => {
                     spacing={10}
                     w='full'
                 >
-
+                    {
+                        products.map(product =>
+                            <ProductCard
+                                key={product._id}
+                                product={product}
+                            />
+                        )
+                    }
                 </SimpleGrid>
                 <Text
                     fontSize='xl'
