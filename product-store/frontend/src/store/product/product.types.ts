@@ -8,6 +8,7 @@ export interface ProductStore {
     products: Product[];
     setProducts: (products: Product[]) => void;
     createProduct: (newProduct: Product) => Promise<Response>;
+    fetchProducts: () => void;
 }
 
 type Response = {

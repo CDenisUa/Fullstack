@@ -37,4 +37,9 @@ export const useProductStore = create<ProductStore>((set) => ({
             message: `Product created successfully.`,
         }
     },
+    fetchProducts: async () => {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_HOST_NAME}/api/products`);
+        const data = await res.json();
+        set({products: data.data});
+    },
 }));
