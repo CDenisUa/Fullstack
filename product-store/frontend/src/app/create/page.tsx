@@ -52,6 +52,11 @@ const CreatePage: FC = () => {
                 status: 'success',
                 isClosable: true,
             });
+            setNewProduct({
+                name: '',
+                price: '',
+                image:''
+            })
         }
     }
 

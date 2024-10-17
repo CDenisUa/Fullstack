@@ -1,10 +1,8 @@
 // Core
-import {Button} from "@chakra-ui/react";
+import {FC} from "react";
+// Components
+import Home from '@/components/home/Home';
 
-export default function Home() {
-  return (
-    <div>
-      Home page
-    </div>
-  );
-}
+const HomePage: FC = () => <Home/>
+
+export default HomePage;

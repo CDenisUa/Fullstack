@@ -27,7 +27,7 @@ const RootLayout: NextPage<Readonly<PropsWithChildren>> = ({children}) =>
             suppressHydrationWarning={true}
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-            <Providers>
+        <Providers>
                 <AppContainer>
                     <NavBar />
                     {children}
