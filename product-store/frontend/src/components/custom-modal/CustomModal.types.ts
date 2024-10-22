@@ -6,4 +6,5 @@ export interface CustomModalPropTypes {
     isOpen: boolean,
     onClose: () => void,
     children: ReactNode,
+    footer: ReactNode,
 }

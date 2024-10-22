@@ -67,4 +67,24 @@ export const useProductStore = create<ProductStore>((set) => ({
             message: data.message,
         }
     },
+    updateProduct: async (id: string | undefined, updatedProduct: Product) => {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_HOST_NAME}/api/products/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type' : 'application/json',
+            },
+            body: JSON.stringify(updatedProduct),
+        });
+        const data = await res.json();
+        if(!data.success) {
+            return {
+                success: false,
+                message: data.message,
+            }
+        }
+
+        set(state => ({
+            products: state.products.filter(product => product['_id'] === id ? data.data : product),
+        }))
+    }
 }));

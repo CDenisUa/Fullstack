@@ -1,14 +1,14 @@
 // Core
-import { FC } from 'react';
+import {FC} from 'react';
 // Types
 import {
     CustomModalPropTypes
 } from "@/components/custom-modal/CustomModal.types";
 // Components
 import {
-    Modal,
+    Modal, ModalBody,
     ModalCloseButton,
-    ModalContent,
+    ModalContent, ModalFooter,
     ModalHeader,
     ModalOverlay
 } from "@chakra-ui/react";
@@ -20,17 +20,23 @@ const CustomModal: FC<CustomModalPropTypes> = (props) => {
         isOpen,
         onClose,
         children,
+        footer,
     } = props;
     return (
         <Modal
             isOpen={isOpen}
             onClose={onClose}
         >
-            <ModalOverlay />
+            <ModalOverlay/>
             <ModalContent>
                 <ModalHeader>{title}</ModalHeader>
-                <ModalCloseButton />
-                {children}
+                <ModalCloseButton/>
+                <ModalBody>
+                    {children}
+                </ModalBody>
+                <ModalFooter>
+                    {footer}
+                </ModalFooter>
             </ModalContent>
         </Modal>
     );

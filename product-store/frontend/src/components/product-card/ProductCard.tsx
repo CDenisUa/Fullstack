@@ -1,36 +1,49 @@
 // Core
-import { FC } from 'react';
+import {FC, useState} from 'react';
 import {
     DeleteIcon,
     EditIcon,
-    useColorModeValue
+    useColorModeValue,
+    useDisclosure
 } from "@chakra-ui/icons";
 // Types
-import { ProductCardPropTypes } from './ProductCard.types';
+import {ProductCardPropTypes} from './ProductCard.types';
+import {Product} from "@/store/product/product.types";
 // Store
 import {useProductStore} from "@/store";
 // Components
 import {
+    VStack,
     Box,
+    Button,
     Heading,
     HStack,
     IconButton,
     Image,
+    Input,
     Text,
     useToast,
 } from "@chakra-ui/react";
+import CustomModal from "@/components/custom-modal/CustomModal";
 
 const ProductCard: FC<ProductCardPropTypes> = (props) => {
-    const { product } = props;
     const toast = useToast();
-    const { deleteProduct } = useProductStore();
+    const {product} = props;
+    const {
+        isOpen,
+        onOpen,
+        onClose
+    } = useDisclosure();
+    const {deleteProduct} = useProductStore();
 
     const textColor = useColorModeValue('gray.600', 'gray.200');
     const bg = useColorModeValue('white', 'gray.800');
 
+    const [updatedProduct, setUpdatedProduct] = useState<Product>(product);
+
     const deleteProductHandle = async (id: string | undefined) => {
         const {success, message} = await deleteProduct(id);
-        if(!success) {
+        if (!success) {
             toast({
                 title: 'Error',
                 description: message,
@@ -47,6 +60,10 @@ const ProductCard: FC<ProductCardPropTypes> = (props) => {
                 isClosable: true
             })
         }
+    };
+
+    const updateProductHandle = () => {
+
     };
 
     return (
@@ -86,18 +103,59 @@ const ProductCard: FC<ProductCardPropTypes> = (props) => {
                 </Text>
                 <HStack spacing={2}>
                     <IconButton
-                        icon={<EditIcon />}
+                        onClick={onOpen}
+                        icon={<EditIcon/>}
                         colorScheme='blue'
                         aria-label='Edit product'
                     />
                     <IconButton
                         onClick={() => deleteProductHandle(product._id)}
-                        icon={<DeleteIcon />}
+                        icon={<DeleteIcon/>}
                         colorScheme='red'
                         aria-label='Delete product'
                     />
                 </HStack>
             </Box>
+            <CustomModal
+                title='Update product'
+                isOpen={isOpen}
+                onClose={onClose}
+                footer={
+                    <>
+                        <Button
+                            colorScheme='blue'
+                            mr={3}
+                            onClick={updateProductHandle}
+                        >
+                            Update
+                        </Button>
+                        <Button
+                            variant='ghost'
+                            onClick={onClose}
+                        >
+                            Cancel
+                        </Button>
+                    </>
+                }
+            >
+                <VStack spacing={4}>
+                    <Input
+                        placeholder='Product Name'
+                        name='product_name'
+                        value={updatedProduct.name}
+                    />
+                    <Input
+                        placeholder='proce'
+                        name='price'
+                        value={updatedProduct.price}
+                    />
+                    <Input
+                        placeholder='Image URL'
+                        name='image'
+                        value={updatedProduct.image}
+                    />
+                </VStack>
+            </CustomModal>
         </Box>
     );
 }
