@@ -20,8 +20,6 @@ const Home: FC = () => {
         fetchProducts();
     },[fetchProducts])
 
-    console.log(products)
-
     return (
         <Container
             maxW='container.xl'
@@ -55,23 +53,26 @@ const Home: FC = () => {
                         )
                     }
                 </SimpleGrid>
-                <Text
-                    fontSize='xl'
-                    textAlign='center'
-                    fontWeight='bold'
-                    color='gray.500'
-                >
-                    No products found 😢
-                    <Link href='/create'>
-                        <Text
-                            as='span'
-                            color='blue.500'
-                            _hover={{textDecoration: 'underline'}}
-                        >
-                            Create a product
-                        </Text>
-                    </Link>
-                </Text>
+                {
+                    !products.length &&
+                    <Text
+                        fontSize='xl'
+                        textAlign='center'
+                        fontWeight='bold'
+                        color='gray.500'
+                    >
+                        No products found 😢
+                        <Link href='/create'>
+                            <Text
+                                as='span'
+                                color='blue.500'
+                                _hover={{textDecoration: 'underline'}}
+                            >
+                                Create a product
+                            </Text>
+                        </Link>
+                    </Text>
+                }
             </VStack>
         </Container>
     );

@@ -7,6 +7,8 @@ import {
 } from "@chakra-ui/icons";
 // Types
 import { ProductCardPropTypes } from './ProductCard.types';
+// Store
+import {useProductStore} from "@/store";
 // Components
 import {
     Box,
@@ -15,12 +17,37 @@ import {
     IconButton,
     Image,
     Text,
+    useToast,
 } from "@chakra-ui/react";
 
 const ProductCard: FC<ProductCardPropTypes> = (props) => {
     const { product } = props;
+    const toast = useToast();
+    const { deleteProduct } = useProductStore();
+
     const textColor = useColorModeValue('gray.600', 'gray.200');
     const bg = useColorModeValue('white', 'gray.800');
+
+    const deleteProductHandle = async (id: string | undefined) => {
+        const {success, message} = await deleteProduct(id);
+        if(!success) {
+            toast({
+                title: 'Error',
+                description: message,
+                status: 'error',
+                duration: 3000,
+                isClosable: true
+            })
+        } else {
+            toast({
+                title: 'Success',
+                description: message,
+                status: 'success',
+                duration: 3000,
+                isClosable: true
+            })
+        }
+    };
 
     return (
         <Box
@@ -64,6 +91,7 @@ const ProductCard: FC<ProductCardPropTypes> = (props) => {
                         aria-label='Edit product'
                     />
                     <IconButton
+                        onClick={() => deleteProductHandle(product._id)}
                         icon={<DeleteIcon />}
                         colorScheme='red'
                         aria-label='Delete product'

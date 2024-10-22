@@ -42,4 +42,29 @@ export const useProductStore = create<ProductStore>((set) => ({
         const data = await res.json();
         set({products: data.data});
     },
+    deleteProduct: async (id: string | undefined) => {
+        if(!id) return {
+            success: false,
+            message: 'ID is required'
+        }
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_HOST_NAME}/api/products/${id}`, {
+            method: 'DELETE',
+        });
+        const data = await res.json();
+
+        if(!data.success) {
+           return {
+               success: false,
+               message: data.message,
+           }
+        }
+
+        set(state => ({
+            products: state.products.filter(product => product['_id'] !== id)
+        }));
+        return {
+            success: true,
+            message: data.message,
+        }
+    },
 }));
