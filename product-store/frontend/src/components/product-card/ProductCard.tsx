@@ -1,5 +1,7 @@
+'use client'
+
 // Core
-import {FC, useState} from 'react';
+import {ChangeEvent, FC, useState} from 'react';
 import {
     DeleteIcon,
     EditIcon,
@@ -29,12 +31,16 @@ import CustomModal from "@/components/custom-modal/CustomModal";
 const ProductCard: FC<ProductCardPropTypes> = (props) => {
     const toast = useToast();
     const {product} = props;
+
     const {
         isOpen,
         onOpen,
         onClose
     } = useDisclosure();
-    const {deleteProduct} = useProductStore();
+    const {
+        deleteProduct,
+        updateProduct
+    } = useProductStore();
 
     const textColor = useColorModeValue('gray.600', 'gray.200');
     const bg = useColorModeValue('white', 'gray.800');
@@ -62,8 +68,35 @@ const ProductCard: FC<ProductCardPropTypes> = (props) => {
         }
     };
 
-    const updateProductHandle = () => {
+    const updateProductHandle = async (id: string | undefined, updatedProduct: Product) => {
+        if(!id || !updatedProduct) return
+        const { success, message } = await updateProduct(id, updatedProduct);
+        onClose();
+        if (!success) {
+            toast({
+                title: 'Error',
+                description: message,
+                status: 'error',
+                duration: 3000,
+                isClosable: true
+            })
+        } else {
+            toast({
+                title: 'Success',
+                description: 'Product updated successfully!',
+                status: 'success',
+                duration: 3000,
+                isClosable: true
+            })
+        }
+    };
 
+    const changeUpdateHandle = (e: ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setUpdatedProduct({
+            ...updatedProduct,
+            [name]: value
+        })
     };
 
     return (
@@ -125,7 +158,7 @@ const ProductCard: FC<ProductCardPropTypes> = (props) => {
                         <Button
                             colorScheme='blue'
                             mr={3}
-                            onClick={updateProductHandle}
+                            onClick={() => updateProductHandle(product['_id'], updatedProduct)}
                         >
                             Update
                         </Button>
@@ -141,18 +174,21 @@ const ProductCard: FC<ProductCardPropTypes> = (props) => {
                 <VStack spacing={4}>
                     <Input
                         placeholder='Product Name'
-                        name='product_name'
+                        name='name'
                         value={updatedProduct.name}
+                        onChange={changeUpdateHandle}
                     />
                     <Input
-                        placeholder='proce'
+                        placeholder='Price'
                         name='price'
                         value={updatedProduct.price}
+                        onChange={changeUpdateHandle}
                     />
                     <Input
                         placeholder='Image URL'
                         name='image'
                         value={updatedProduct.image}
+                        onChange={changeUpdateHandle}
                     />
                 </VStack>
             </CustomModal>

@@ -76,6 +76,7 @@ export const useProductStore = create<ProductStore>((set) => ({
             body: JSON.stringify(updatedProduct),
         });
         const data = await res.json();
+
         if(!data.success) {
             return {
                 success: false,
@@ -84,7 +85,12 @@ export const useProductStore = create<ProductStore>((set) => ({
         }
 
         set(state => ({
-            products: state.products.filter(product => product['_id'] === id ? data.data : product),
+            products: state.products.map(product => product['_id'] === id ? data.data : product)
         }))
+
+        return {
+            success: true,
+            message: data.message,
+        }
     }
 }));

@@ -13,7 +13,7 @@ export interface ProductStore {
     createProduct: (newProduct: Product) => Promise<Response>;
     deleteProduct: (id: string | undefined) => Promise<Response>;
     fetchProducts: () => void;
-    updateProduct: (id: string | undefined, updatedProduct: Product) => Promise<Response | undefined>;
+    updateProduct: (id: string | undefined, updatedProduct: Product) => Promise<Response>;
 }
 
 type Response = {

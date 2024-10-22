@@ -6,13 +6,10 @@ import Link from "next/link";
 import {
     PlusSquareIcon,
     useColorMode,
-    useColorModeValue
 } from "@chakra-ui/icons";
 // Images
 import {IoMoon} from "react-icons/io5";
 import {LuSun} from "react-icons/lu";
-// Store
-import { useProductStore } from '@/store';
 // Components
 import {
     Button,
@@ -24,7 +21,6 @@ import {
 
 const NavBar: FC = () => {
     const {colorMode, toggleColorMode} = useColorMode();
-    const { products, setProducts } = useProductStore();
     return (
         <Container
             maxW='1140px'
