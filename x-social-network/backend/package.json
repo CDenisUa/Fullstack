@@ -4,6 +4,7 @@
   "main": "index.js",
   "type": "module",
   "imports": {
+    "#root/*": "./*",
     "#src/*": "./src/*",
     "#routes/*": "./src/routes/*",
     "#models/*": "./src/models/*",
