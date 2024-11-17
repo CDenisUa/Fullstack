@@ -20,3 +20,11 @@ docker-compose restart
 ```
 docker-compose down
 ```
+
+
+### JWT
+*Generate new JWT token*
+
+```
+ openssl rand -base64 32
+```

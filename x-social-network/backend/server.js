@@ -10,6 +10,11 @@ const app = express();
 
 connectToDatabase();
 
+// Middlewares
+app.use(express.json());
+app.use(express.urlencoded({ extended: true })); // to parse from data
+
+// Routes
 app.use('/api/auth', authRoutes);
 
 app.listen(PORT, () => {

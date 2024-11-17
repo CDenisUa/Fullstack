@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema({
         ref: 'User',
         default: []
     }],
-    profileImage: {
+    profileImg: {
         type: String,
         default: ""
     },
