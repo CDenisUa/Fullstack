@@ -11,7 +11,9 @@ import User from "#models/user.model.js"
 export const signUp = async (req, res) => {
     try {
         const { fullName, userName, email, password } = req.body;
+
         if(!validator.isEmail(email)) return res.status(400).send({ error: "Invalid email format"})
+        if(password.length < 6) return res.status(400).send({ error: "Password should be at least 6 characters" });
 
         const existingUser = await User.findOne({ userName });
         const existingEmail = await User.findOne({ email });
