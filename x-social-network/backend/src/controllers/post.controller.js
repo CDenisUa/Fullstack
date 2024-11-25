@@ -31,3 +31,24 @@ export const createPost = async (req, res) => {
       res.status(500).json({ error: error.message || 'An unexpected error occurred' });
   }
 };
+
+export const deletePost = async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.id);
+        if(!post) return res.status(404).json({ error: "Post not found" });
+
+        if(post.user.toString() !== req.user['_id'].toString()) {
+            return res.status(404).json({ error: "You are not authorized to delete this post" });
+        }
+        if(post.img) {
+            const imgId = post.img.split('/').pop().split('.')[0];
+            await cloudinary.uploader.destroy(imgId);
+        }
+
+        await Post.findByIdAndDelete(req.params.id);
+
+    } catch(error) {
+        console.log('Error in deletePost: ', error.message);
+        res.status(500).json({ error: error.message || 'Error in deletePost' });
+    }
+};

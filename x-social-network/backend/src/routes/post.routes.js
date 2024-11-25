@@ -4,7 +4,8 @@ import express from 'express';
 import {protectRoute} from "#src/middleware/protectRoute.js";
 // Controllers
 import {
-    createPost
+    createPost,
+    deletePost
 } from '#controllers/post.controller.js'
 
 const router = express.Router();
@@ -12,6 +13,6 @@ const router = express.Router();
 router.post('/create', protectRoute, createPost);
 router.post('/like/:id', protectRoute, () => {});
 router.post('/comment/:id', protectRoute, () => {});
-router.delete('/', protectRoute, () => {})
+router.delete('/:id', protectRoute, deletePost)
 
 export default router;
