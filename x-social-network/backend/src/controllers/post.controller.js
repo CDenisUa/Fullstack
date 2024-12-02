@@ -3,6 +3,7 @@ import { v2 as cloudinary } from 'cloudinary';
 // Models
 import User from '#models/user.model.js';
 import Post from '#models/post.model.js';
+import Notification from '#models/notification.model.js';
 
 export const createPost = async (req, res) => {
   try {
@@ -75,6 +76,40 @@ export const commentOnPost = async (req, res) => {
 
     } catch (error){
         console.log('Error in commentOnPost: ', error.message);
+        res.status(500).json({ error: error.message || 'Error in deletePost' });
+    }
+};
+
+export const likeUnlikePost = async (req, res) => {
+    try {
+        const postId = req.params.id;
+        const userId = req.user['_id'].toString();
+
+        const post = await Post.findById(postId);
+
+        if(!post) return res.status(404).json({ error: "Post not found" });
+
+        const userLikedPost = post.likes.includes(userId);
+        if(userLikedPost) {
+            await Post.updateOne({_id: postId}, {$pull: {likes: userId}});
+            res.status(201).json({message: 'Post unliked successfully'});
+        } else {
+            post.likes.push(userId);
+            await post.save();
+
+            const notification = new Notification({
+                from: userId,
+                to: post.user,
+                type: "like"
+            })
+
+            await notification.save();
+
+            res.status(201).json({message: 'Post liked successfully'});
+        }
+
+    } catch (error){
+        console.log('Error in likeUnlikePost: ', error.message);
         res.status(500).json({ error: error.message || 'Error in deletePost' });
     }
 };
