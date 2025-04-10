@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+python-jose
+passlib[bcrypt]
+sqlalchemy
+asyncpg
+python-dotenv
+openai
+tortoise-orm[asyncpg]

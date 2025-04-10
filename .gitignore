@@ -360,7 +360,6 @@ htmlcov/
 .nox/
 .coverage
 .coverage.*
-.cache
 nosetests.xml
 coverage.xml
 *.cover
@@ -368,7 +367,6 @@ coverage.xml
 .hypothesis/
 
 # Django specific
-*.log
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
@@ -378,11 +376,7 @@ instance/
 .webassets-cache
 
 # FastAPI
-.env
 .env.*
-
-# PyCharm
-.idea/
 
 # VSCode
 .vscode/
