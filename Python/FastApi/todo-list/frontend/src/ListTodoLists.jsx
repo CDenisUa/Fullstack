@@ -1,11 +1,10 @@
 // Core
-import {useRef} from "react";
-import {BiSolidTrash} from "react-icons/bi";
-import cx from 'classnames';
+import { useRef } from "react";
+import { BiSolidTrash } from "react-icons/bi";
 // Styles
-import styles from "./styles.module.css";
+import "./ListTodoLists.css";
 
-const ListToDoLists = (props) => {
+function ListTodoLists(props) {
     const {
         listSummaries,
         handleSelectList,
@@ -13,24 +12,17 @@ const ListToDoLists = (props) => {
         handleDeleteToDoList,
     } = props;
 
-    const labelRef = useRef(null);
+    const labelRef = useRef();
 
     if (listSummaries === null) {
-        return (
-            <div className={cx(
-                styles["ListToDoLists"],
-                styles["loading"]
-            )}
-            >
-                Loading to-do lists ...
-            </div>);
+        return <div className="ListToDoLists loading">Loading to-do lists ...</div>;
     } else if (listSummaries.length === 0) {
         return (
-            <div className={styles["ListToDoLists"]}>
-                <div className={styles["box"]}>
+            <div className="ListToDoLists">
+                <div className="box">
                     <label>
                         New To-Do List:&nbsp;
-                        <input id={labelRef} type="text"/>
+                        <input id={labelRef} type="text" />
                     </label>
                     <button
                         onClick={() =>
@@ -45,12 +37,12 @@ const ListToDoLists = (props) => {
         );
     }
     return (
-        <div className={styles["ListToDoLists"]}>
+        <div className="ListToDoLists">
             <h1>All To-Do Lists</h1>
-            <div className={styles["box"]}>
+            <div className="box">
                 <label>
                     New To-Do List:&nbsp;
-                    <input id={labelRef} type="text"/>
+                    <input id={labelRef} type="text" />
                 </label>
                 <button
                     onClick={() =>
@@ -64,20 +56,20 @@ const ListToDoLists = (props) => {
                 return (
                     <div
                         key={summary.id}
-                        className={styles["summary"]}
+                        className="summary"
                         onClick={() => handleSelectList(summary.id)}
                     >
-                        <span className={styles["name"]}>{summary.name} </span>
-                        <span className={styles["count"]}>({summary.item_count} items)</span>
-                        <span className={styles["flex"]}></span>
+                        <span className="name">{summary.name} </span>
+                        <span className="count">({summary.item_count} items)</span>
+                        <span className="flex"></span>
                         <span
-                            className={styles["trash"]}
+                            className="trash"
                             onClick={(evt) => {
                                 evt.stopPropagation();
                                 handleDeleteToDoList(summary.id);
                             }}
                         >
-              <BiSolidTrash/>
+              <BiSolidTrash />
             </span>
                     </div>
                 );
@@ -86,4 +78,4 @@ const ListToDoLists = (props) => {
     );
 }
 
-export default ListToDoLists;
+export default ListTodoLists;
