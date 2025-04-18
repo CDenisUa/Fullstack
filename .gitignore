@@ -41,10 +41,6 @@ next-env.d.ts
 # Logs
 logs
 *.log
-npm-debug.log*
-pnpm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 lerna-debug.log*
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
@@ -52,8 +48,8 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 # MongoDB
 **/data/db/
-*.log
 *.log.*
+**/backend/data/
 
 # Runtime data
 pids
