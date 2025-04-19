@@ -14,6 +14,7 @@
   "imports": {
     "#root/*": "./*",
     "#src/*": "./src/*",
+    "#lib/*": "./src/lib/*",
     "#routes/*": "./src/routes/*",
     "#models/*": "./src/models/*",
     "#controllers/*": "./src/controllers/*"

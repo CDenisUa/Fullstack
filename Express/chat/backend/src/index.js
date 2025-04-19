@@ -6,12 +6,14 @@ import {connectDB} from "#src/lib/db.js";
 // Routes
 import authRoutes from '#routes/auth.route.js';
 
-const app = express();
 dotenv.config();
+
+const app = express();
+app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 
 app.listen(process.env.PORT, () => {
     console.log(`Listening on port ${process.env.PORT}`);
-    connectDB();
+    connectDB().catch((error) => console.log("MongoDB connection error:", error));
 });
