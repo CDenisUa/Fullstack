@@ -15,6 +15,7 @@
     "#root/*": "./*",
     "#src/*": "./src/*",
     "#lib/*": "./src/lib/*",
+    "#middleware/*": "./src/middleware/*",
     "#routes/*": "./src/routes/*",
     "#models/*": "./src/models/*",
     "#controllers/*": "./src/controllers/*"

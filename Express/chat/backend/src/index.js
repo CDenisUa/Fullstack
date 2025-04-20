@@ -1,6 +1,7 @@
 // Core
 import express from 'express';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 // Lib
 import {connectDB} from "#src/lib/db.js";
 // Routes
@@ -12,7 +13,9 @@ const app = express();
 
 // Middlewares
 app.use(express.json());
+app.use(cookieParser());
 
+// Routes
 app.use("/api/auth", authRoutes);
 
 app.listen(process.env.PORT, () => {
