@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 import {connectDB} from "#src/lib/db.js";
 // Routes
 import authRoutes from '#routes/auth.route.js';
+import messageRoutes from '#routes/message.route.js';
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ app.use(cookieParser());
 
 // Routes
 app.use("/api/auth", authRoutes);
+app.use("/api/message", messageRoutes);
 
 app.listen(process.env.PORT, () => {
     console.log(`Listening on port ${process.env.PORT}`);
