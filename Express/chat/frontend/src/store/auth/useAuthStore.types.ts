@@ -17,6 +17,7 @@ export interface AuthState {
 
 export interface AuthActions {
     checkAuth: () => Promise<void>;
+    signUp: () => Promise<void>;
     setAuthUser?: (u: AuthUser | null) => void;
 }
 

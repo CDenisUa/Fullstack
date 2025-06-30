@@ -1,7 +1,6 @@
 // Core
 import {FC, useEffect} from 'react';
 import {Routes, Route, Navigate} from "react-router-dom";
-import { Loader } from 'lucide-react';
 // Store
 import { useAuthStore } from "./store/auth/useAuthStore";
 // Components
@@ -26,16 +25,17 @@ const App: FC = () => {
 
     console.log(authUser)
     console.log(checkAuth)
+    console.log(isCheckingAuth)
 
     useEffect(() => {
-        checkAuth();
+        // checkAuth();
     }, [checkAuth])
 
-    if(isCheckingAuth && !authUser) return (
-        <div>
-            <Loader className="size-10 animate-spin" />
-        </div>
-    )
+    // if(isCheckingAuth && !authUser) return (
+    //     <div>
+    //         <Loader className="size-10 animate-spin" />
+    //     </div>
+    // )
 
     return (
         <div>
