@@ -1,11 +1,11 @@
 // Core
 import { useCallback, ChangeEventHandler, FC, FormEvent, useState } from 'react';
 import { Mail, MessageSquare, User, Lock, EyeOff, Eye, Loader2 } from "lucide-react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 // Store
-import {useAuthStore} from "../store/auth/useAuthStore.ts";
+import { useAuthStore } from "../store/auth/useAuthStore.ts";
 // Components
-import { InputWrapper } from "../components";
+import { InputWrapper, AuthImagePattern } from "../components";
 
 type SignUpForm = {
     fullName: string,
@@ -52,7 +52,7 @@ const SignUpPage: FC = () => {
                 <div className="w-full max-w-md space-y-8">
                     <div className="text-center mb-8">
                         <div className="flex flex-col items-center gap-2 group">
-                            <div className="size-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                            <div className="size-12 rounded-xl bg-primary/10 flex items-center justify-center transition-colors">
                                 <MessageSquare className="size-6 textarea-primary" />
                             </div>
                             <h1 className="text-2xl font-bold mt-2">Create Account</h1>
@@ -135,6 +135,11 @@ const SignUpPage: FC = () => {
                     </div>
                 </div>
             </div>
+
+            <AuthImagePattern
+                title="Join our community"
+                subtitle="Connect with friends, share moments, and stay in touch with your loved ones."
+            />
         </div>
     );
 }
