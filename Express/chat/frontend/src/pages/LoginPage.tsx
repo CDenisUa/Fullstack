@@ -1,11 +1,11 @@
 // Core
-import {FC, FormEvent, useState} from 'react';
+import { FC, FormEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
-import {Eye, EyeOff, Lock, Mail, MessageSquare } from 'lucide-react';
+import { Eye, EyeOff, Lock, Mail, MessageSquare } from 'lucide-react';
 // Store
 import { useAuthStore } from "../store/auth/useAuthStore.ts";
 // Components
-import {AuthImagePattern, InputWrapper, LoadingLabel} from "../components";
+import { AuthImagePattern, InputWrapper, LoadingLabel } from "../components";
 
 const LoginPage: FC = () => {
     const { logIn, isLoggedIn } = useAuthStore();

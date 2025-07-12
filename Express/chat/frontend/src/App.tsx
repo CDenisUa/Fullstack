@@ -25,11 +25,8 @@ const App: FC = () => {
     } = useAuthStore();
 
     useEffect(() => {
-        checkAuth()
-            .catch((error) => console.log(error));
+        checkAuth().catch((error) => console.log(error));
     }, [checkAuth])
-
-    console.log({ authUser });
 
     if (isCheckingAuth && !authUser)
         return (

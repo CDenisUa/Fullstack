@@ -6,7 +6,7 @@ import { axiosInstance } from "../../lib/axios";
 import type { UseAuthStoreType } from "./useAuthStore.types.ts";
 import type { AxiosError } from "axios";
 
-export const useAuthStore = create<UseAuthStoreType>((set, get) => ({
+export const useAuthStore = create<UseAuthStoreType>((set) => ({
     authUser: null,
     isSigningUp: false,
     isLoggedIn: false,
@@ -15,7 +15,7 @@ export const useAuthStore = create<UseAuthStoreType>((set, get) => ({
 
     checkAuth: async () => {
         try {
-            const res = await axiosInstance.get("/auth/checkAuth");
+            const res = await axiosInstance.get("/auth/check");
             set({
                 authUser: res.data,
             })
@@ -67,5 +67,16 @@ export const useAuthStore = create<UseAuthStoreType>((set, get) => ({
             const e = error as AxiosError<{ message: string}>
             toast.error(e.response?.data?.message ?? e.message)
         }
-    }
+    },
+    updateProfile: async (data) => {
+        set({isUpdatingProfile: true});
+        try {
+            const res = await axiosInstance.put("/auth/update-profile", data);
+            set({ authUser: res.data });
+            toast.success("Profile updated successfully");
+        } catch (error) {
+            const e = error as AxiosError<{ message: string}>
+            toast.error(e.response?.data?.message ?? e.message)
+        }
+    },
 }));
