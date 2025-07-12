@@ -1,17 +1,12 @@
 // Core
 import { useCallback, ChangeEventHandler, FC, FormEvent, useState } from 'react';
-import { Mail, MessageSquare, User, Lock, EyeOff, Eye, Loader2 } from "lucide-react";
+import { Mail, MessageSquare, User, Lock, EyeOff, Eye } from "lucide-react";
 import { Link } from "react-router-dom";
+import { toast } from 'react-hot-toast';
 // Store
 import { useAuthStore } from "../store/auth/useAuthStore.ts";
 // Components
-import { InputWrapper, AuthImagePattern } from "../components";
-
-type SignUpForm = {
-    fullName: string,
-    email: string,
-    password: string,
-}
+import {InputWrapper, AuthImagePattern, LoadingLabel} from "../components";
 
 const SignUpPage: FC = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -23,10 +18,15 @@ const SignUpPage: FC = () => {
 
     const { signUp, isSigningUp } = useAuthStore();
 
-    console.log(signUp)
+    const validateForm = (): boolean => {
+        const fail = (msg: string) => { toast.error(msg); return false; };
 
-    const validateForm = () => {
-
+        if (!formData.password)              return fail('Password is required');
+        if (formData.password.length < 6)    return fail('Password must be at least 6 characters');
+        if (!formData.fullName.trim())       return fail('Full name is required');
+        if (!formData.email.trim())          return fail('Email is required');
+        if (!/\S+@\S+\.\S+/.test(formData.email)) return fail('Invalid email format');
+        return true;
     };
 
     const toggleShow = useCallback(() => setShowPassword(prev => !prev), []);
@@ -39,10 +39,11 @@ const SignUpPage: FC = () => {
         }))
     };
 
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        if(!validateForm) return
+        const success = validateForm();
+        if(success) await signUp(formData);
 
     };
 
@@ -115,14 +116,10 @@ const SignUpPage: FC = () => {
                             className="btn btn-primary w-full"
                             disabled={isSigningUp}
                         >
-                            {
-                                isSigningUp ?
-                                    <>
-                                        <Loader2 className="size-5 aninate-spin" />
-                                        Loading...
-                                    </>
-                                    : "Create Account"
-                            }
+                            <LoadingLabel
+                                loading={isSigningUp}
+                                label="Create Account"
+                            />
                         </button>
                     </form>
                     <div className="text-center">

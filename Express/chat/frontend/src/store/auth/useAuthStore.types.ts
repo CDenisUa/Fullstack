@@ -17,8 +17,10 @@ export interface AuthState {
 
 export interface AuthActions {
     checkAuth: () => Promise<void>;
-    signUp: () => Promise<void>;
-    setAuthUser?: (u: AuthUser | null) => void;
+    signUp: (data: SignUpForm) => Promise<void>;
+    setAuthUser?: (user: AuthUser | null) => void;
+    logIn: (data: LoginTypes) => Promise<void>;
+    logOut: () => Promise<void>;
 }
 
-export type UseAuthStore = AuthActions & AuthState;
+export type UseAuthStoreType = AuthActions & AuthState;
