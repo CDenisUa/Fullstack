@@ -4,17 +4,18 @@ import toast from 'react-hot-toast';
 // Lib
 import { axiosInstance } from "../../lib/axios.ts";
 // Types
-import type { UseChatStoreTypes } from './useChatStore.types.ts';
+import type { UseChatStoreTypes, UserTypes } from './useChatStore.types.ts';
 import type { AxiosError } from "axios";
 
 export const useChatStore = create<UseChatStoreTypes>((set) => ({
     messages: [],
     users: [],
-    selectedUser: [],
+    selectedUser: null,
     isUsersLoading: false,
     isMessagesLoading: false,
-    // setSelectedUser: (selectedUser) => set({ selectedUser }),
+    onlineUsers: [],
 
+    setSelectedUser: (selectedUser: UserTypes) => set({ selectedUser }),
     getUsers: async () => {
         set({ isUsersLoading: true });
         try {

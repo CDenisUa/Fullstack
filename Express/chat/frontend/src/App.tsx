@@ -1,11 +1,13 @@
 // Core
-import {FC, useEffect} from 'react';
+import {FC} from 'react';
 import {Routes, Route, Navigate} from "react-router-dom";
 import {Toaster} from "react-hot-toast";
 import { Loader } from 'lucide-react';
 // Store
 import { useAuthStore } from "./store/auth/useAuthStore";
 import { useThemeStore } from "./store/theme/useThemeStore.ts";
+// Hooks
+import { useAuth } from "./hooks"
 // Components
 import {
     Navbar,
@@ -21,15 +23,12 @@ import {
 const App: FC = () => {
     const {
         authUser,
-        checkAuth,
         isCheckingAuth
     } = useAuthStore();
 
     const { theme } = useThemeStore();
 
-    useEffect(() => {
-        checkAuth().catch((error) => console.log(error));
-    }, [checkAuth])
+    useAuth();
 
     if (isCheckingAuth && !authUser)
         return (
