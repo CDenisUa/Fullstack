@@ -1,10 +1,13 @@
 // Core
 import { FC } from 'react';
-import {Sidebar} from "lucide-react";
 // Store
 import { useChatStore } from "../store/chat/useChatStore.ts";
 // Components
-import { ChatContainer, NoChatSelected } from '../components/chat'
+import {
+    ChatContainer,
+    NoChatSelected,
+    Sidebar
+} from '../components/chat'
 
 const HomePage: FC = () => {
     const { selectedUser } = useChatStore();
@@ -15,7 +18,7 @@ const HomePage: FC = () => {
                     <div className='flex h-full rounded-lg overflow-hidden'>
                         <Sidebar />
                         {
-                            !selectedUser
+                            selectedUser
                                 ? <NoChatSelected />
                                 : <ChatContainer />
                         }
