@@ -13,7 +13,7 @@ const Sidebar: FC = () => {
 
     useFetchUsers();
 
-    if(isUsersLoading) return <SidebarSkeleton quantity={8} />;
+    if(isUsersLoading) return <SidebarSkeleton quantity={users ? users.length : 8} />;
 
     return (
         <aside className='h-full w-20 lg:w-72 border-r border-base-300 flex flex-col transition-all duration-200'>
@@ -23,9 +23,7 @@ const Sidebar: FC = () => {
                     <span className='font-medium hidden lg:block'>Contacts</span>
                 </div>
             </div>
-            <Contacts
-                users={users}
-            />
+            <Contacts users={users} />
         </aside>
     );
 }

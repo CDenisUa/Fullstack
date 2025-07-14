@@ -12,14 +12,14 @@ const ContactButton: FC<ContactButtonPropTypes> = ({ user }) => {
         fullName
     } = user;
 
-    const { setSelectedUser, onlineUsers } = useChatStore();
+    const { setSelectedUser, onlineUsers, selectedUser } = useChatStore();
 
     return (
         <button
             key={_id}
             className={`
                 w-full p-3 flex items-center gap-3 hover:bg-base-300 transition-colors
-                ${ _id === user._id && "bg-base-300 ring-1 ring-base-300" }
+                ${ _id === selectedUser?._id && "bg-base-300 ring-1 ring-base-300" }
             `}
             onClick={() => setSelectedUser(user)}
         >
