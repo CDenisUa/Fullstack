@@ -7,7 +7,7 @@ import { Loader } from 'lucide-react';
 import { useAuthStore } from "./store/auth/useAuthStore";
 import { useThemeStore } from "./store/theme/useThemeStore.ts";
 // Hooks
-import { useAuth } from "./hooks"
+import { useFetchAuth } from "./hooks"
 // Components
 import {
     Navbar,
@@ -28,7 +28,7 @@ const App: FC = () => {
 
     const { theme } = useThemeStore();
 
-    useAuth();
+    useFetchAuth();
 
     if (isCheckingAuth && !authUser)
         return (

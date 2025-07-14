@@ -7,7 +7,7 @@ export interface UseChatStoreTypes {
     onlineUsers: string[],
     getUsers: () => Promise<void>,
     getMessages: (userId: string) => Promise<void>,
-    setSelectedUser: (user: UserTypes) => void,
+    setSelectedUser: (user: UserTypes | null) => void,
 }
 
 export interface UserTypes {

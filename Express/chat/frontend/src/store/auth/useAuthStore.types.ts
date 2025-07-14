@@ -9,6 +9,7 @@ export interface AuthUser {
 
 export interface AuthState {
     authUser: AuthUser | null,
+    onlineUsers: string[],
     isSigningUp: boolean,
     isLoggedIn: boolean,
     isUpdatingProfile: boolean,
@@ -18,10 +19,6 @@ export interface AuthState {
 export interface UploadProfileTypes {
     profilePicture: string | ArrayBuffer | null,
 }
-
-export type AuthStorePersist = UseAuthStoreType & {
-    authUser: UseAuthStoreType["authUser"];
-};
 
 export interface AuthActions {
     checkAuth: () => Promise<void>;

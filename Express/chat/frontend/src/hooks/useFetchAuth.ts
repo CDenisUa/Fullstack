@@ -3,7 +3,7 @@ import { useEffect } from "react";
 // Store
 import { useAuthStore } from "../store/auth/useAuthStore.ts";
 
-const useAuth = (): void => {
+const useFetchAuth = (): void => {
     const { checkAuth } = useAuthStore();
 
     useEffect(() => {
@@ -11,4 +11,4 @@ const useAuth = (): void => {
     }, [checkAuth])
 }
 
-export default  useAuth;
+export default  useFetchAuth;

@@ -36,9 +36,7 @@ const ContactButton: FC<ContactButtonPropTypes> = ({ user }) => {
             </div>
             <div className='hidden lg:block text-left min-w-0'>
                 <div className='font-medium truncate'>{ fullName }</div>
-                <div>
-                    { onlineUsers.includes(_id) ? "Online" : "Offline" }
-                </div>
+                <div>{ onlineUsers.includes(_id) ? "Online" : "Offline" }</div>
             </div>
         </button>
     );

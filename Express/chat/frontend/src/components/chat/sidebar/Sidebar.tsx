@@ -9,14 +9,7 @@ import { useFetchUsers } from "../../../hooks"
 import { SidebarSkeleton, Contacts } from '../../../components/chat';
 
 const Sidebar: FC = () => {
-    const {
-        users,
-        // selectedUser,
-        // setSelectedUser,
-        isUsersLoading
-    } = useChatStore();
-
-    // const onlineUsers = [];
+    const { users, isUsersLoading } = useChatStore();
 
     useFetchUsers();
 
