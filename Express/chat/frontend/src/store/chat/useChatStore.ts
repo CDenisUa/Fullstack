@@ -7,7 +7,7 @@ import { axiosInstance } from "../../lib/axios.ts";
 import type { UseChatStoreTypes, UserTypes } from './useChatStore.types.ts';
 import type { AxiosError } from "axios";
 
-export const useChatStore = create<UseChatStoreTypes>((set) => ({
+export const useChatStore = create<UseChatStoreTypes>((set, get) => ({
     messages: [],
     users: [],
     selectedUser: null,
@@ -41,4 +41,16 @@ export const useChatStore = create<UseChatStoreTypes>((set) => ({
             set({ isUsersLoading: false });
         }
     },
+    sendMessage: async (messageData) => {
+        const { selectedUser, messages } = get();
+        try {
+            const res = await axiosInstance.post(`/messages/send/${selectedUser?._id}`, messageData);
+            set({ messages: [...messages, res.data] })
+        } catch (error) {
+            const e = error as AxiosError<{ message: string}>;
+            toast.error(e.response?.data?.message ?? e.message);
+        } finally {
+
+        }
+    }
 }));
