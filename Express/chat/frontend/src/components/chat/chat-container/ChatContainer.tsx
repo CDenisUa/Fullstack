@@ -9,13 +9,14 @@ import {
     ChatHeader,
     MessageInput
 } from '../../chat'
+import ChatLoader from "../chat-loader/ChatLoader.tsx";
 
 const ChatContainer: FC = () => {
     const { getMessages, selectedUser, isMessagesLoading } = useChatStore();
 
     useFetchMessages(selectedUser, getMessages);
 
-    if(isMessagesLoading) return <div>Loading...</div>
+    if(isMessagesLoading) return <ChatLoader />
 
     return (
         <div className='flex-1 flex flex-col overflow-auto'>

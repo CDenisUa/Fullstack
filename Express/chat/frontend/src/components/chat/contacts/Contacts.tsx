@@ -1,5 +1,5 @@
 // Core
-import { FC } from 'react';
+import {FC, memo} from 'react';
 // Types
 import type { ContactsPropTypes } from './Contacts.types.ts';
 // Components
@@ -11,4 +11,4 @@ const Contacts: FC<ContactsPropTypes> = ({ users }) => (
     </div>
 );
 
-export default Contacts;
+export default memo(Contacts);

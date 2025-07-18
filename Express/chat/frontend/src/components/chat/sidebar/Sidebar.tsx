@@ -6,7 +6,8 @@ import { useChatStore } from "../../../store/chat/useChatStore.ts";
 // Hooks
 import { useFetchUsers } from "../../../hooks"
 // Components
-import { SidebarSkeleton, Contacts } from '../../../components/chat';
+import { Contacts } from '../../../components/chat';
+import { SidebarSkeleton } from "../..";
 
 const Sidebar: FC = () => {
     const { users, isUsersLoading } = useChatStore();

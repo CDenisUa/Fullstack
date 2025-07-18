@@ -1,5 +1,5 @@
 // Core
-import { FC } from 'react';
+import {FC, memo} from 'react';
 // Types
 import type { ContactButtonPropTypes } from './ContactButton.types';
 // Store
@@ -42,4 +42,4 @@ const ContactButton: FC<ContactButtonPropTypes> = ({ user }) => {
     );
 }
 
-export default ContactButton;
+export default memo(ContactButton);
