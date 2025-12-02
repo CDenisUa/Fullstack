@@ -1,7 +1,7 @@
 // Core
 import { useCallback, ChangeEventHandler, FC, FormEvent, useState } from 'react';
 import { Mail, MessageSquare, User, Lock, EyeOff, Eye } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from 'react-hot-toast';
 // Store
 import { useAuthStore } from "../store/auth/useAuthStore.ts";
@@ -17,6 +17,7 @@ const SignUpPage: FC = () => {
     });
 
     const { signUp, isSigningUp } = useAuthStore();
+    const navigate = useNavigate();
 
     const validateForm = (): boolean => {
         const fail = (msg: string) => { toast.error(msg); return false; };
@@ -43,8 +44,10 @@ const SignUpPage: FC = () => {
         event.preventDefault();
 
         const success = validateForm();
-        if(success) await signUp(formData);
-
+        if(success) {
+            await signUp(formData);
+            navigate("/");
+        }
     };
 
     return (

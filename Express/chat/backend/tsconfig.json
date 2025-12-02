@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "#root/*": ["./*"],
+      "#src/*": ["./src/*"],
+      "#lib/*": ["./src/lib/*"],
+      "#middleware/*": ["./src/middleware/*"],
+      "#routes/*": ["./src/routes/*"],
+      "#models/*": ["./src/models/*"],
+      "#controllers/*": ["./src/controllers/*"]
+    },
+    "module": "ES2022",
+    "moduleResolution": "Bundler",
+    "target": "ES2022",
+    "outDir": "dist",
+    "rootDir": "src",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "strict": false,
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
+}

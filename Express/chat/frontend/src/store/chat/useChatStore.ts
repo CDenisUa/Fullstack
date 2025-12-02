@@ -49,8 +49,6 @@ export const useChatStore = create<UseChatStoreTypes>((set, get) => ({
         } catch (error) {
             const e = error as AxiosError<{ message: string}>;
             toast.error(e.response?.data?.message ?? e.message);
-        } finally {
-
-        }
+        } 
     }
 }));

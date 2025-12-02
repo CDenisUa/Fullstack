@@ -1,15 +1,6 @@
-// Core
 import express from "express";
-// Middleware
-import { protectRoute } from "#middleware/auth.middleware.js";
-// Controllers
-import {
-    checkAuth,
-    signup,
-    login,
-    logout,
-    updateProfile,
-} from '#controllers/auth.controller.js';
+import { protectRoute } from "#middleware/auth.middleware";
+import { checkAuth, signup, login, logout, updateProfile } from "#controllers/auth.controller";
 
 const router = express.Router();
 
@@ -20,3 +11,4 @@ router.post("/logout", logout);
 router.put("/update-profile", protectRoute, updateProfile);
 
 export default router;
+
