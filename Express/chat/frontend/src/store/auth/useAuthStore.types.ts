@@ -24,10 +24,10 @@ export interface AuthActions {
     checkAuth: () => Promise<void>;
     signUp: (data: SignUpForm) => Promise<void>;
     setAuthUser?: (user: AuthUser | null) => void;
+    setIsCheckingAuth?: (value: boolean) => void;
     logIn: (data: LoginTypes) => Promise<void>;
     updateProfile: (data: UploadProfileTypes) => Promise<void>;
     logOut: () => Promise<void>;
 }
 
 export type UseAuthStoreType = AuthActions & AuthState;
-

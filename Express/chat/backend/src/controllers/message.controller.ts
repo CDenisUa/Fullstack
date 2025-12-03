@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
-import User from "#models/user.model";
-import Message from "#models/message.model";
-import cloudinary from "#lib/cloudinary";
+import User from "../models/user.model.js";
+import Message from "../models/message.model.js";
+import cloudinary from "../lib/cloudinary.js";
 
 export const getUsersForSidebar = async (req: Request & { user: any }, res: Response) => {
   const loggedInUserId = req.user["_id"];
@@ -49,4 +49,3 @@ export const sentMessage = async (req: Request & { user: any }, res: Response) =
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
-

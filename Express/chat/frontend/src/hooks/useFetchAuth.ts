@@ -3,12 +3,16 @@ import { useEffect } from "react";
 // Store
 import { useAuthStore } from "../store/auth/useAuthStore.ts";
 
-const useFetchAuth = (): void => {
-    const { checkAuth } = useAuthStore();
+const useFetchAuth = (enabled: boolean = true): void => {
+    const { checkAuth, setIsCheckingAuth } = useAuthStore();
 
     useEffect(() => {
-        checkAuth().catch((error) => console.error("Failed to fetch check auth:", error));
-    }, [checkAuth])
+        if (enabled) {
+            checkAuth().catch(() => {});
+        } else {
+            setIsCheckingAuth?.(false);
+        }
+    }, [enabled, checkAuth, setIsCheckingAuth])
 }
 
 export default  useFetchAuth;

@@ -1,0 +1,52 @@
+services:
+  mongo:
+    image: mongo:latest
+    container_name: chat-mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - ./backend/data:/data/db
+
+  backend-dev:
+    image: node:20-alpine
+    container_name: chat-backend-dev
+    working_dir: /app
+    restart: always
+    depends_on:
+      - mongo
+    env_file:
+      - ./backend/.env
+    environment:
+      - PORT=5001
+      - MONGODB_URI=mongodb://root:password@mongo:27017/chat-app?authSource=admin
+    volumes:
+      - ./backend:/app
+      - backend-node-modules:/app/node_modules
+    command: sh -c "npm ci && npm run dev"
+    ports:
+      - "5001:5001"
+
+  frontend-dev:
+    image: node:20-alpine
+    container_name: chat-frontend-dev
+    working_dir: /app
+    restart: always
+    depends_on:
+      - backend-dev
+    environment:
+      - VITE_API_URL=http://localhost:5001/api
+    volumes:
+      - ./frontend:/app
+      - frontend-node-modules:/app/node_modules
+    command: sh -c "npm ci && npm run dev -- --host"
+    ports:
+      - "5173:5173"
+
+volumes:
+  backend-node-modules:
+  frontend-node-modules:
+

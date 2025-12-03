@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import type { Request, Response, NextFunction } from "express";
-import User from "#models/user.model";
+import User from "../models/user.model.js";
 
 export const protectRoute = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -20,4 +20,3 @@ export const protectRoute = async (req: Request, res: Response, next: NextFuncti
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
-

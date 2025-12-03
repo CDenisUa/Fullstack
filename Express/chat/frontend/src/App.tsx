@@ -1,6 +1,6 @@
 // Core
 import {FC} from 'react';
-import {Routes, Route, Navigate} from "react-router-dom";
+import {Routes, Route, Navigate, useLocation} from "react-router-dom";
 import {Toaster} from "react-hot-toast";
 import { Loader } from 'lucide-react';
 // Store
@@ -28,9 +28,11 @@ const App: FC = () => {
 
     const { theme } = useThemeStore();
 
-    useFetchAuth();
+    const location = useLocation();
+    const enabled = !(location.pathname === "/login" || location.pathname === "/signup");
+    useFetchAuth(enabled);
 
-    if (isCheckingAuth && !authUser)
+    if (enabled && isCheckingAuth && !authUser)
         return (
             <div className="flex items-center justify-center h-screen">
                 <Loader className="size-10 animate-spin" />

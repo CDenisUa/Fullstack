@@ -17,30 +17,24 @@ export const useAuthStore = create<UseAuthStoreType>((set) => ({
     checkAuth: async () => {
         try {
             const res = await axiosInstance.get("/auth/check");
-            set({
-                authUser: res.data,
-            })
-        } catch (error) {
-            set({
-                authUser: null,
-            });
-            console.error("Error in checkAuth: ", error);
+            set({ authUser: res.data });
+        } catch {
+            set({ authUser: null });
         } finally {
-            set({
-                isCheckingAuth: false,
-            })
+            set({ isCheckingAuth: false });
         }
     },
+    setIsCheckingAuth: (value: boolean) => {
+        set({ isCheckingAuth: value });
+    },
     logIn: async (data: LoginTypes) => {
-        set({ isLoggedIn: false});
+        set({ isLoggedIn: true });
         try {
             const res = await axiosInstance.post("/auth/login", data);
-            set({ authUser: res.data});
-            toast.success("Logged is successfully");
-
-
+            set({ authUser: res.data });
+            toast.success("Logged in successfully");
         } catch (error) {
-            const e = error as AxiosError<{ message: string}>;
+            const e = error as AxiosError<{ message: string }>;
             toast.error(e.response?.data?.message ?? e.message);
         } finally {
             set({ isLoggedIn: false });
