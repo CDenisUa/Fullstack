@@ -7,9 +7,10 @@ import { useFetchMessages } from "../../../hooks";
 // Components
 import {
     ChatHeader,
-    MessageInput
+    MessageInput,
+    ChatMessages,
+    ChatLoader,
 } from '../../chat'
-import ChatLoader from "../chat-loader/ChatLoader.tsx";
 
 const ChatContainer: FC = () => {
     const { getMessages, selectedUser, isMessagesLoading } = useChatStore();
@@ -19,10 +20,16 @@ const ChatContainer: FC = () => {
     if(isMessagesLoading) return <ChatLoader />
 
     return (
-        <div className='flex-1 flex flex-col overflow-auto'>
-            <ChatHeader />
-            <p>Messages...</p>
-            <MessageInput />
+        <div className='flex-1 flex flex-col'>
+            <div className='shrink-0'>
+                <ChatHeader />
+            </div>
+            <div className='flex-1 overflow-y-auto'>
+                <ChatMessages />
+            </div>
+            <div className='shrink-0'>
+                <MessageInput />
+            </div>
         </div>
     );
 }

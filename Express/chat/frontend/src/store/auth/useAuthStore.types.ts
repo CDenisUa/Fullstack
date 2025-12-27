@@ -14,6 +14,7 @@ export interface AuthState {
     isLoggedIn: boolean,
     isUpdatingProfile: boolean,
     isCheckingAuth: boolean,
+    socket: import("socket.io-client").Socket | null,
 }
 
 export interface UploadProfileTypes {
@@ -28,6 +29,8 @@ export interface AuthActions {
     logIn: (data: LoginTypes) => Promise<void>;
     updateProfile: (data: UploadProfileTypes) => Promise<void>;
     logOut: () => Promise<void>;
+    connectSocket: () => void;
+    disconnectSocket: () => void;
 }
 
 export type UseAuthStoreType = AuthActions & AuthState;

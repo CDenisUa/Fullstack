@@ -88,7 +88,12 @@ export const updateProfile = async (req: Request & { user: any }, res: Response)
 
 export const checkAuth = async (req: Request & { user: any }, res: Response) => {
   try {
-    res.status(200).json(req.user);
+    const user = req.user;
+    const obj = typeof user.toObject === "function" ? user.toObject() : user;
+    res.status(200).json({
+      ...obj,
+      profilePicture: obj.profilePicture || "/avatar.png",
+    });
   } catch (error: any) {
     console.log("Error in check auth controller", error.message);
     res.status(500).json({ message: "Internal Server Error" });

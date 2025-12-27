@@ -27,7 +27,8 @@ const ContactButton: FC<ContactButtonPropTypes> = ({ user }) => {
                 <img
                     src={profilePicture || "/avatar.png"}
                     alt={fullName}
-                    className='size-12 object-cover rounded-full'
+                    className='size-12 object-cover rounded-full border'
+                    onError={(e) => { e.currentTarget.src = "/avatar.png"; }}
                 />
                 {
                     onlineUsers.includes(_id) &&

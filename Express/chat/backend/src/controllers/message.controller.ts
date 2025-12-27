@@ -7,7 +7,14 @@ export const getUsersForSidebar = async (req: Request & { user: any }, res: Resp
   const loggedInUserId = req.user["_id"];
   try {
     const filteredUsers = await User.find({ _id: { $ne: loggedInUserId } }).select("-password");
-    res.status(200).json(filteredUsers);
+    const normalized = filteredUsers.map(u => {
+      const obj = u.toObject();
+      return {
+        ...obj,
+        profilePicture: obj.profilePicture || "/avatar.png",
+      };
+    });
+    res.status(200).json(normalized);
   } catch (error: any) {
     console.log("Error in getUsersForSidebar", error.message);
     res.status(500).json({ error: error.message });

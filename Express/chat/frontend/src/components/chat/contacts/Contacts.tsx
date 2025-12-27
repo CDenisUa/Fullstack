@@ -7,7 +7,7 @@ import { ContactButton } from '../../../components/chat'
 
 const Contacts: FC<ContactsPropTypes> = ({ users }) => (
     <div className='overflow-y-auto w-full py-3'>
-        { users.map(user => <ContactButton user={user} />) }
+        { users.map(user => <ContactButton key={user._id} user={user} />) }
     </div>
 );
 

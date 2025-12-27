@@ -23,11 +23,10 @@ import {
 const App: FC = () => {
     const {
         authUser,
-        isCheckingAuth
+        isCheckingAuth,
     } = useAuthStore();
 
     const { theme } = useThemeStore();
-
     const location = useLocation();
     const enabled = !(location.pathname === "/login" || location.pathname === "/signup");
     useFetchAuth(enabled);

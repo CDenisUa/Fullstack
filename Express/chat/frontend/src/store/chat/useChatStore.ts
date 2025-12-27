@@ -41,14 +41,18 @@ export const useChatStore = create<UseChatStoreTypes>((set, get) => ({
             set({ isUsersLoading: false });
         }
     },
-    sendMessage: async (messageData) => {
+    sendMessage: async (messageData: { text: string; image: string | null }) => {
         const { selectedUser, messages } = get();
+        if (!selectedUser?._id) {
+            toast.error("Select a user to send message");
+            return;
+        }
         try {
-            const res = await axiosInstance.post(`/messages/send/${selectedUser?._id}`, messageData);
+            const res = await axiosInstance.post(`/message/send/${selectedUser._id}`, messageData);
             set({ messages: [...messages, res.data] })
         } catch (error) {
             const e = error as AxiosError<{ message: string}>;
             toast.error(e.response?.data?.message ?? e.message);
         } 
     }
-}));
+})) ;

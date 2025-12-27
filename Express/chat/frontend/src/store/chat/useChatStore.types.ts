@@ -8,7 +8,7 @@ export interface UseChatStoreTypes {
     getUsers: () => Promise<void>,
     getMessages: (userId: string) => Promise<void>,
     setSelectedUser: (user: UserTypes | null) => void,
-    sendMessage: (messageData: MessageType) => void,
+    sendMessage: (messageData: SendMessagePayload) => void,
 }
 
 export interface UserTypes {
@@ -19,6 +19,15 @@ export interface UserTypes {
 }
 
 export interface MessageType {
+    _id: string;
+    senderId: string;
+    receiverId: string;
+    text: string;
+    image: string | null;
+    createdAt: string;
+}
+
+export interface SendMessagePayload {
     text: string;
     image: string | null;
 }
